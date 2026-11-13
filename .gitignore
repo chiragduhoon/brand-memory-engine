@@ -16,3 +16,4 @@ suspicious_log.json
 
 # Large test documents
 *.pdf
+.pytest_cache/

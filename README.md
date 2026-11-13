@@ -68,6 +68,19 @@ In the Streamlit sidebar, upload a brand PDF (a style guide / brand guidelines d
 
 Any chunk flagged as an injection attempt during ingestion is logged to `suspicious_log.json` instead of being embedded — check that file to see the quarantine in action.
 
+## Tests
+
+```bash
+pip install pytest
+pytest -q          # 12 tests, offline: no API keys, no real vector store
+```
+
+They check the claims this README makes:
+- **Rule recall guarantee:** every rule whose tag matches the query is returned, explicit tags are added, and similarity search is only a fallback.
+- **Rules are never trimmed:** when rules use up most of the 1,500-token budget, facts are dropped instead.
+- **Trust score:** citation coverage ignores made-up chunk ids, and first-pass acceptance scores higher than a redraft.
+- **Chunking:** paragraphs are never split, and chunks stay under the token limit.
+
 ## API reference
 
 | Method | Endpoint  | Body                          | Returns |
